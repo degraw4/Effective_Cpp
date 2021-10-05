@@ -16,20 +16,25 @@
 
 using namespace std;
 
-template<class T>
-class smartPtr{
-public:
-    // 模板成员函数
-    template<class Y>
-    // 初始化列表保证了只有合法的Y*->T*可以通过编译
-    smartPtr(const smartPtr<Y>& other): ptr(other.get()) {}
-    T* get() const { return ptr; }
-private:
-    T* ptr;
+// TMP递归计算阶乘
+// enum hack
+
+template<unsigned n>
+struct Factorial{
+    enum { value = n * Factorial<n - 1>::value };
 };
+
+template<>
+struct Factorial<0>{
+    enum { value = 1 };
+};
+
 
 int main(int argc, char** argv)
 {
-    
+    cout << Factorial<0>::value << endl;
+    cout << Factorial<3>::value << endl;
+    cout << Factorial<5>::value << endl;
+
     return 0;
 }

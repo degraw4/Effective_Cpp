@@ -17,6 +17,7 @@
 using namespace std;
 
 // 编译器拒绝在模板化基类中寻找继承来的名字
+// 原因：编译器认为模板基类可能会被特化，而特化后的基类未必含有一般模板中的函数，因此拒绝寻找和调用
 
 template<class Company>
 class MsgSender{
